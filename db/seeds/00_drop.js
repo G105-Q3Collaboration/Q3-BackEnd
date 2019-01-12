@@ -1,6 +1,6 @@
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('accounts').del()
+  return knex('accounts_posts_reactions').del()
     .then(() => {
       return knex('reactions').del()
     })
@@ -8,6 +8,6 @@ exports.seed = function(knex, Promise) {
       return knex('posts').del()
     })
     .then(() => {
-      return knex('accounts_posts_reactions').del()
+      return knex('accounts').del()
     })
 };

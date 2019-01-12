@@ -6,15 +6,13 @@ exports.up = function(knex, Promise) {
       table.integer('reactions')
       table.timestamps(true, true);
   })
-}
 .then(t => {
   return knex.schema.raw(
     `ALTER TABLE "accounts_posts_reactions"
      ADD CONSTRAINT "accounts_posts_reactions_unique" UNIQUE(account_id, post_id)`
   )
 })
-
+}
 exports.down = function(knex, Promise) {
     return knex.schema.dropTable('accounts_posts_reactions');
-    
 };
