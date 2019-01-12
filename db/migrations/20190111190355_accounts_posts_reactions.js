@@ -13,6 +13,7 @@ exports.up = function(knex, Promise) {
   )
 })
 }
+
 exports.down = function(knex, Promise) {
-    return knex.schema.dropTable('accounts_posts_reactions');
+    return knex.schema.dropTableIfExists('accounts_posts_reactions');
 };
