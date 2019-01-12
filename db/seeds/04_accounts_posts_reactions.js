@@ -24,29 +24,6 @@ exports.seed = function(knex, Promise) {
   ])
   .then(() => {
     return knex.raw(
-      "SELECT setval('accounts_posts_reactions', (SELECT MAX(id) FROM accounts_posts_reactions));
-      ALTER TABLE "accounts_posts_reactions" ADD CONSTRAINT "accounts_posts_reactions_unique" UNIQUE(post_id, account_id);")
+      "SELECT setval('accounts_posts_reactions', (SELECT MAX(id) FROM accounts_posts_reactions));")
   })
 };
-
-
-const TABLE_NAME = 'reviews'
-
-exports.up = knex => {
-  return knex.schema.createTable(TABLE_NAME, t => {
-    t.increments()
-    t.string('title').notNullable()
-    t.float('rating', 2, 1).notNullable().defaultsTo(0)
-    t.text('comment').notNullable()
-    t.integer('account_id').references('accounts.id')
-    t.integer('snack_id').references('snacks.id').onDelete('CASCADE')
-    t.timestamps(true, true)
-
-    return t
-  }).then(t => {
-    return knex.schema.raw(
-      `ALTER TABLE "accounts_posts_reactions"
-       ADD CONSTRAINT "accounts_posts_reactions_unique" UNIQUE(post_id, account_id)`
-    )
-  })
-}
