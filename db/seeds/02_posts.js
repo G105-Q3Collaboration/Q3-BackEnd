@@ -5,11 +5,11 @@ exports.seed = function(knex, Promise) {
     {id:3, account_id:2, content:"They say owners look like their pets. My owner isn't that handsome. Im offended."},
     {id:4, account_id:2, content:"#puplife"},
     {id:5, account_id:3, content:"Just watched An American Tail. Not impressed."},
-    {id:6, account_id:3, content:},
-    {id:7, account_id:4, content:},
-    {id:8, account_id:4, content:},
-    {id:9, account_id:5, content:},
-    {id:10, account_id:5, content:}
+    {id:6, account_id:3, content:"Why do people assume that I live in a small archway in your baseboard? Thats speciesist. #ignorant"},
+    {id:7, account_id:4, content:"Im not poisonous. Please love me."},
+    {id:8, account_id:4, content:"I cant wait to shed this skin. #summerclothes"},
+    {id:9, account_id:5, content:"I can fly. But I prefer to dance."},
+    {id:10, account_id:5, content:"#lookoutbelow!!"}
   ])
   .then(() => {
     return knex.raw("SELECT setval('posts_id_seq', (SELECT MAX(id) FROM posts));")
