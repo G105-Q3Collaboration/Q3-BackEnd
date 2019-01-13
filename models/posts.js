@@ -32,7 +32,7 @@ function getAllOneUsersPosts(userId) {
         })
 }
 
-function getOnePost(userId, postId) {
+function getOnePost(postId) {
     return knex('posts')
         .where({
             'posts.id': postId

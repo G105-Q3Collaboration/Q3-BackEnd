@@ -28,7 +28,7 @@ function getAllOneUserPosts(req, res, next) {
 };
 
 function getOnePost(req, res, next) {
-  model.getOnePost(req.params.userId, req.params.postId).then(function (result) {
+  model.getOnePost(req.params.postId).then(function (result) {
       if (!result || result.length == 0) return next({
         status: 404,
         message: "post not found!"
