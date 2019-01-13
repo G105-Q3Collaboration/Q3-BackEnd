@@ -1,6 +1,6 @@
 const userModel = require('../models/accounts')
 
-function login(req, res, next) {
+function signup(req, res, next) {
     
     const {
       username,
@@ -66,7 +66,7 @@ function editOneAccount(req, res, next) {
         })
 }
 module.exports = {
-    login,
+    signup,
     getOneAccount,
     editOneAccount
 }
