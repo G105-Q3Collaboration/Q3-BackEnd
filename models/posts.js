@@ -1,9 +1,9 @@
 const knex = require('../db/knex')
 
-function addPost(userId, newPost) {
+function addPost(accountId, newPost) {
     return knex('posts')
         .where({
-            'accounts_id':userId
+            'accounts_id':accountId
         })
         .insert(newPost)
         .then(result => {
@@ -11,21 +11,22 @@ function addPost(userId, newPost) {
         })
 }
 
-function updatePost(postId, newItem) {
+function updatePost(postId, newPost) {
     return knex('posts')
         .where({
             'posts.id': postId
         })
         .update({
-            "content": newItem.content
+            "content": newPost.content
         }).returning('*')
 }
 
 
-function getAllOneUsersPosts(userId) {
+function getAllOneUsersPosts(accountId) {
+    console.log("hello, hitting getalloneusersposts")
     return knex('posts')
         .where({
-            'accounts_id': userId
+            'accounts.id': accountId
         })
         .then(result => {
             return result

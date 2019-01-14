@@ -15,7 +15,7 @@ function getAllPosts(req, res, next) {
 }
 
 function getAllOneUserPosts(req, res, next) {
-  model.getAllOneUserPosts(req.params.userId)
+  model.getAllOneUserPosts(req.params.accountId)
     .then(function (result) {
       if (result.length < 1)
         return next({
@@ -55,7 +55,7 @@ function addPost(req, res, next) {
 
 
 function deletePost(req, res, next) {
-  return model.deletepost(req.params.userId, req.params.postId)
+  return model.deletepost(req.params.accountId, req.params.postId)
     .then(result => {
       res.status(200).send(result)
     })

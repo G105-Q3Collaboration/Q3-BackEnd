@@ -1,4 +1,4 @@
-const userModel = require('../models/accounts')
+const accountModel = require('../models/accounts')
 
 function signup(req, res, next) {
     
@@ -32,7 +32,7 @@ function signup(req, res, next) {
 }
 
 function getOneAccount(req, res, next) {
-    return userModel.getOneAccount(req.params.id)
+    return accountModel.getOneAccount(req.params.id)
         .then((result) => {
             if (!result) {
                 return next({
@@ -44,13 +44,26 @@ function getOneAccount(req, res, next) {
         })
 }
 
+function getAllAccounts (req,res,next) {
+    return accountModel.getAllAccounts()
+    .then((result) => {
+        if (!result) {
+            return next({
+                status: 404,
+                message: "accounts not found"
+            })
+        }
+        res.status(200).send(result)
+    })
+}
+
 function editOneAccount(req, res, next) {
     const {
         username,
         password,
         profileInformation
     } = req.body;
-    return userModel.editOneAccount(req.params.userId, req.body)
+    return accountModel.editOneAccount(req.params.userId, req.body)
         .then((result) => {
             if (!result) {
                 return next({
@@ -68,5 +81,6 @@ function editOneAccount(req, res, next) {
 module.exports = {
     signup,
     getOneAccount,
+    getAllAccounts,
     editOneAccount
 }

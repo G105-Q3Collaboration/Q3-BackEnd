@@ -11,9 +11,9 @@ app.use(cors())
 app.use(morgan('dev'))
 app.use(bodyParser.json())
 
-app.use('/users', require('./routes/accounts'))
+app.use('/accounts', require('./routes/accounts'))
 app.use('/auth', require('./routes/auth'))
-app.get('/posts', require('./controllers/posts').getAllPosts)
+app.get('/posts', require('./routes/posts').getAllPosts)
 
 app.use((req, res, next) => {
     next({status:404, message: "Unable to locate"})
