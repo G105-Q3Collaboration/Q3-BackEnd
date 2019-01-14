@@ -4,7 +4,7 @@ const postsCtrl = require('../controllers/posts')
 const authCtrl = require('../controllers/auth')
 
 router.get('/',postsCtrl.getAllPosts)
-router.get('/:postId',postsCtrl.getPost)
+router.get('/:postId',postsCtrl.getOnePost)
 router.delete('/:postId',postsCtrl.deletePost)
 router.post('/' ,postsCtrl.addPost)
 router.put('/postId',postsCtrl.updatePost)
