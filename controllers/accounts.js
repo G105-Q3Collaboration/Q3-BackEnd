@@ -1,24 +1,28 @@
 const userModel = require('../models/accounts')
 
 function signup(req, res, next) {
-    
+
     const {
-      username,
-      password,
-      displayname,
-      profilepic,
-      eatinghabits,
-      quirks,
-      bio,
-      age,
-      type,
-      interactions
+        petname,
+        username,
+        password
+        //   displayname,
+        //   profilepic,
+        //   eatinghabits,
+        //   quirks,
+        //   bio,
+        //   age,
+        //   type,
+        //   interactions
     } = req.body
-    if (!username || !password || !displayname || !profilepic || !eatinghabits || !quirks || !bio || !age || !type) return next({
+    // if(!displayname || !profilepic || !eatinghabits || !quirks || !bio || !age || !type)
+    if (!petname || !username || !password) return next({
         status: 400,
         message: 'Incomplete signup'
     })
-    return accountModel.signup(username, password, displayname, profilepic, eatinghabits, quirks, bio, age, type, interactions)
+
+    // return accountModel.signup(displayname, profilepic, eatinghabits, quirks, bio, age, type, interactions)
+    return accountModel.signup(petname, username, password)
         .then(([data]) => {
             if (!data) return next({
                 status: 500,
