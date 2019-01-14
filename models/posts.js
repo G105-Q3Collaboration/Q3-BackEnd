@@ -3,7 +3,7 @@ const knex = require('../db/knex')
 function addPost(accountId, newPost) {
     return knex('posts')
         .where({
-            'accounts_id':accountId
+            'account_id':accountId
         })
         .insert(newPost)
         .then(result => {
@@ -26,7 +26,7 @@ function getAllOneUsersPosts(accountId) {
     console.log("hello, hitting getalloneusersposts")
     return knex('posts')
         .where({
-            'accounts.id': accountId
+            'account_id': accountId
         })
         .then(result => {
             return result
@@ -55,6 +55,8 @@ function deletePost(postId) {
 }
 
 function getAllPosts() {
+    console.log("hello, hitting getallposts")
+
     return knex('posts')
     .then(result => {
         return result
