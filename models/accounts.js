@@ -62,6 +62,7 @@ function editOneAccount(accountId, body) {
                 })
         })
 }
+
 module.exports = {
     signup,
     getOneAccount,
