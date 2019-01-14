@@ -1,6 +1,7 @@
 const knex = require('../db/knex')
 
 function addPost(accountId, newPost) {
+    console.log("hitting addPost")
     return knex('posts')
         .where({
             'account_id':accountId
@@ -12,6 +13,7 @@ function addPost(accountId, newPost) {
 }
 
 function updatePost(postId, newPost) {
+    console.log("hitting updatePost")
     return knex('posts')
         .where({
             'posts.id': postId
@@ -22,8 +24,8 @@ function updatePost(postId, newPost) {
 }
 
 
-function getAllOneUsersPosts(accountId) {
-    console.log("hello, hitting getalloneusersposts")
+function getAllOneUserPosts(accountId) {
+    console.log("hitting getalloneusersposts")
     return knex('posts')
         .where({
             'account_id': accountId
@@ -33,10 +35,12 @@ function getAllOneUsersPosts(accountId) {
         })
 }
 
-function getOnePost(postId) {
+function getOnePost(postId, accountId) {
+    console.log("hitting getOnePost")
     return knex('posts')
         .where({
-            'posts.id': postId
+            'posts.id': postId,
+            'account_id':accountId
         })
         .then(result => {
             return result
@@ -44,6 +48,7 @@ function getOnePost(postId) {
 };
 
 function deletePost(postId) {
+    console.log("hitting deletePost")
     return knex('posts')
         .where({
             'posts.id': postId
@@ -55,8 +60,7 @@ function deletePost(postId) {
 }
 
 function getAllPosts() {
-    console.log("hello, hitting getallposts")
-
+    console.log("hitting getallposts")
     return knex('posts')
     .then(result => {
         return result
@@ -65,7 +69,7 @@ function getAllPosts() {
 
 module.exports = {
   getAllPosts,
-  getAllOneUsersPosts,
+  getAllOneUserPosts,
   getOnePost,
   addPost,
   deletePost,
