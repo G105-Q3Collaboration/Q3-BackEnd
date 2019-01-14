@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/G105-Q3Collaboration/Q3-BackEnd.git"
+    "url": "git+https://github.com/squeaker-g105-q3/squeaker-backend"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/G105-Q3Collaboration/Q3-BackEnd/issues"
+    "url": "https://github.com/squeaker-g105-q3/squeaker-backend/issues"
   },
-  "homepage": "https://github.com/G105-Q3Collaboration/Q3-BackEnd#readme",
+  "homepage": "https://github.com/squeaker-g105-q3/squeaker-backend#readme",
   "dependencies": {
     "bcrypt": "^3.0.3",
     "body-parser": "^1.18.3",

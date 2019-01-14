@@ -53,6 +53,13 @@ function deletePost(postId) {
         })
 }
 
+function getAllPosts() {
+    return knex('posts')
+    .then(result => {
+        return result
+    })
+}
+
 module.exports = {
   getAllPosts,
   getAllOneUsersPosts,
