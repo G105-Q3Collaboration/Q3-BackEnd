@@ -2,12 +2,13 @@ const knex = require('../db/knex')
 const bcrypt = require('bcrypt')
 
 function getOneAccount(id){
-    return knex('users')
+    return knex('accounts')
     .where({id})
+    .returning('*')
 }
 
 function signup(username, password, displayname, profilepic, eatinghabits, quirks,bio, age, type, interactions ) {
-    return knex('acccounts')
+    return knex('accounts')
         .where('username', username)
         .then(([data]) => {
             if (!!data) throw {
@@ -34,13 +35,19 @@ function signup(username, password, displayname, profilepic, eatinghabits, quirk
         })
 }
 
-function editOneAccount(userId) {
-    return knex('users')
+
+function getAllAccounts () {
+    return knex('accounts')
+    .returning('*')
+}
+
+function editOneAccount(accountId) {
+    return knex('accounts')
         .where({
-            id: userId
+            id: accountId
         })
         .then(response => {
-            return knex('users')
+            return knex('accounts')
                 .update({
                     username: response.username,
                     password: response.password,
@@ -51,5 +58,6 @@ function editOneAccount(userId) {
 module.exports = {
     signup,
     getOneAccount,
+    getAllAccounts,
     editOneAccount
 }
