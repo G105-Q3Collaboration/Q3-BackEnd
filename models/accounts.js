@@ -1,9 +1,9 @@
 const knex = require('../db/knex')
 const bcrypt = require('bcrypt')
 
-function getOneAccount(id){
+function getOneAccount(accountId){
     return knex('accounts')
-    .where({id})
+    .where({id:accountId})
     .returning('*')
 }
 
@@ -41,17 +41,24 @@ function getAllAccounts () {
     .returning('*')
 }
 
-function editOneAccount(accountId) {
+function editOneAccount(accountId, body) {
     return knex('accounts')
         .where({
             id: accountId
         })
-        .then(response => {
+        .then(() => {
             return knex('accounts')
                 .update({
-                    username: response.username,
-                    password: response.password,
-                    profileInformation: response.profileInformation
+                    username:body.username,
+                    password:body.password,
+                    displayname:body.displayname,
+                    profilepic:body.profilepic,
+                    eatinghabits:body.eatinghabits,
+                    quirks:body.quirks,
+                    bio:body.bio,
+                    age:body.age,
+                    type:body.type,
+                    interaction:body.interaction
                 })
         })
 }

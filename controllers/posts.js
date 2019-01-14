@@ -40,7 +40,7 @@ function getOnePost(req, res, next) {
 };
 
 function addPost(req, res, next) {
-  model.addPost(req.body).then((result) => {
+  model.addPost(req.params.accountId, req.body).then((result) => {
       if (!result)
         return next({
           status: 500,
@@ -63,7 +63,7 @@ function deletePost(req, res, next) {
 }
 
 function updatePost(req, res, next) {
-  return itemsModel.updatePost(req.params.postId, req.body)
+  return model.updatePost(req.params.postId, req.body)
   .then((result) => {
     if (!result) {
       return next({

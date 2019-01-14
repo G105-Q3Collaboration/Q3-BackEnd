@@ -1,18 +1,18 @@
 const accountModel = require('../models/accounts')
 
 function signup(req, res, next) {
-    
+
     const {
-      username,
-      password,
-      displayname,
-      profilepic,
-      eatinghabits,
-      quirks,
-      bio,
-      age,
-      type,
-      interactions
+        username,
+        password,
+        displayname,
+        profilepic,
+        eatinghabits,
+        quirks,
+        bio,
+        age,
+        type,
+        interactions
     } = req.body
     if (!username || !password || !displayname || !profilepic || !eatinghabits || !quirks || !bio || !age || !type) return next({
         status: 400,
@@ -32,7 +32,7 @@ function signup(req, res, next) {
 }
 
 function getOneAccount(req, res, next) {
-    return accountModel.getOneAccount(req.params.id)
+    return accountModel.getOneAccount(req.params.accountId)
         .then((result) => {
             if (!result) {
                 return next({
@@ -44,26 +44,33 @@ function getOneAccount(req, res, next) {
         })
 }
 
-function getAllAccounts (req,res,next) {
+function getAllAccounts(req, res, next) {
     return accountModel.getAllAccounts()
-    .then((result) => {
-        if (!result) {
-            return next({
-                status: 404,
-                message: "accounts not found"
-            })
-        }
-        res.status(200).send(result)
-    })
+        .then((result) => {
+            if (!result) {
+                return next({
+                    status: 404,
+                    message: "accounts not found"
+                })
+            }
+            res.status(200).send(result)
+        })
 }
 
 function editOneAccount(req, res, next) {
     const {
         username,
         password,
-        profileInformation
+        displayname,
+        profilepic,
+        eatinghabits,
+        quirks,
+        bio,
+        age,
+        type,
+        interactions
     } = req.body;
-    return accountModel.editOneAccount(req.params.userId, req.body)
+    return accountModel.editOneAccount(req.params.accountId, req.body)
         .then((result) => {
             if (!result) {
                 return next({
@@ -74,7 +81,14 @@ function editOneAccount(req, res, next) {
             res.status(201).send({
                 username,
                 password,
-                profileInformation
+                displayname,
+                profilepic,
+                eatinghabits,
+                quirks,
+                bio,
+                age,
+                type,
+                interactions
             })
         })
 }
