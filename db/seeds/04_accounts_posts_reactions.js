@@ -24,6 +24,6 @@ exports.seed = function(knex, Promise) {
   ])
   .then(() => {
     return knex.raw(
-      "SELECT setval('accounts_posts_reactions', (SELECT MAX(id) FROM accounts_posts_reactions));")
+      "SELECT setval('accounts_posts_reactions_id_seq', (SELECT MAX(id) FROM accounts_posts_reactions));")
   })
 };
