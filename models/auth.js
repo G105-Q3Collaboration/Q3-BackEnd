@@ -2,6 +2,7 @@ const knex = require('../db/knex')
 const bcrypt = require('bcrypt')
 
 function login(username, password){
+    console.log("hittingloginmodel")
     return knex('accounts')
     .where('username', username)
     .then(([data]) => {
