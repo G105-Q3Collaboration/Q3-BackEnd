@@ -3,7 +3,7 @@ const app = express()
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 8000
 
 if(process.env.NODE_ENV !== 'production') require('dotenv').load()
 
@@ -19,11 +19,21 @@ app.use((req, res, next) => {
     next({status:404, message: "Unable to locate"})
 })
 
+// app.use((err, req, res, next) => {
+//     console.error(err)
+//     const status =  err.status || 500
+//     res.status(status).send(err)
+// })
+
 app.use((err, req, res, next) => {
-    console.error(err)
-    const status =  err.status || 500
-    res.status(status).send(err)
+    const error = {}
+    if (process.env.NODE_ENV !== 'production' && err.stack) error.stack = err.stack
+    error.status = err.status || 500
+    error.message = err.message || `Internal Server Error`
+    console.error(error.message)
+    res.status(error.status).json(error)
 })
+
 
 const listener = () => console.log(`Listening on ${port}`)
 app.listen(port, listener)

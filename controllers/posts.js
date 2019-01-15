@@ -1,4 +1,4 @@
-const model = require('../models/posts.js');
+const model = require('../models/posts');
 
 function getAllPosts(req, res, next) {
   model.getAllPosts()
@@ -22,19 +22,18 @@ function getAllOneUserPosts(req, res, next) {
           status: 404,
           message: "post not found"
         })
-      res.status(200).send(result);
+      res.status(200).send(result)
     })
     .catch(next)
 };
 
 function getOnePost(req, res, next) {
   model.getOnePost(req.params.postId, req.params.accountId).then(function (result) {
-      if (!result || result.length == 0) return next({
+      if (!result || result.length === 0) return next({
         status: 404,
         message: "post not found!"
       })
-
-      res.status(200).send(result);
+      res.status(200).send(result)
     })
     .catch(next)
 };
