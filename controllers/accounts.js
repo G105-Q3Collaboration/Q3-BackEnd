@@ -1,13 +1,13 @@
 const accountModel = require('../models/accounts')
 
 function signup(req, res, next) {
-  const { username, password } = req.body
-  if (!username && !password)
+  const { petname, username, password } = req.body
+  if (!petname || !username || !password)
     return next({
       status: 400,
       message: 'Username and Password required for creating an account'
     })
-  return accountModel.signup(username, password, displayname, profilepic, eatinghabits, quirks, bio, age, type, interactions)
+  return accountModel.signup(petname, username, password)
   .then(([data]) => {
     if (!data) return next({
       status: 500,
