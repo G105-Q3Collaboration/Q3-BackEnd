@@ -2,10 +2,7 @@ const knex = require('../db/knex')
 
 function addPost(accountId, newPost) {
   return knex('posts')
-    .where({
-      'account_id':accountId
-    })
-    .insert(newPost)
+    .insert({'account_id':accountId, 'content':newPost})
     .then((result) => {
       return result
     })
