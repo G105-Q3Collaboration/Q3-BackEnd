@@ -26,7 +26,7 @@ function authenticate(req, res, next) {
 }
 
 function authStatus(req, res, next) {
-  res.status(200).send({id:req.claim.sub.id})
+  res.status(200).send({id:req.claim.sub.id, username:req.claim.sub.username})
 }
 
 function checkRequest(req, res, next) {
