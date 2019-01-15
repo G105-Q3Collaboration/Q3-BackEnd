@@ -3,7 +3,11 @@ const app = express()
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+<<<<<<< HEAD
 const port = process.env.PORT || 8000
+=======
+const port = process.env.PORT || 5000
+>>>>>>> master
 
 if(process.env.NODE_ENV !== 'production') require('dotenv').load()
 
