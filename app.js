@@ -16,13 +16,16 @@ app.use('/auth', require('./routes/auth'))
 app.use('/posts', require('./routes/posts'))
 
 app.use((req, res, next) => {
-    next({status:404, message: "Unable to locate"})
+  next({status:404, message: 'Unable to locate'})
 })
 
 app.use((err, req, res, next) => {
-    console.error(err)
-    const status =  err.status || 500
-    res.status(status).send(err)
+	const error = {}
+	if (process.env.NODE_ENV !== 'production' && err.stack) error.stack = err.stack
+	error.status = err.status || 500
+	error.message = err.message || `Internal Server Error`
+	console.error(error.message)
+	res.status(error.status).json(error)
 })
 
 const listener = () => console.log(`Listening on ${port}`)
