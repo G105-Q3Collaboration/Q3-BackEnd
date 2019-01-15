@@ -2,7 +2,7 @@ const accountModel = require('../models/accounts')
 
 function signup(req, res, next) {
   const { petname, username, password } = req.body
-  if (!petname || !username || !password)
+  if (!username && !password)
     return next({
       status: 400,
       message: 'Username and Password required for creating an account'
