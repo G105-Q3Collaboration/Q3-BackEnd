@@ -4,7 +4,8 @@ const postsCtrl = require('../controllers/posts')
 const authCtrl = require('../controllers/auth')
 
 router.get('/allPosts', postsCtrl.getAllPosts)
-router.get('/', authCtrl.authenticate, authCtrl.checkRequest, postsCtrl.getAllOneUserPosts)
+
+router.get('/', postsCtrl.getAllOneUserPosts)
 
 router.get('/:postId', postsCtrl.getOnePost)
 
@@ -17,6 +18,7 @@ router.put('/:postId', postsCtrl.updatePost)
 
 // router.get('/allPosts',authCtrl.authenticate, authCtrl.checkRequest, postsCtrl.getAllPosts)
 
+// router.get('/',authCtrl.authenticate, authCtrl.checkRequest, postsCtrl.getAllOneUserPosts)
 
 // router.get('/:postId',authCtrl.authenticate, authCtrl.checkRequest, postsCtrl.getOnePost)
 
