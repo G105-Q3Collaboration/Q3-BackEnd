@@ -1,7 +1,7 @@
 const accountModel = require('../models/accounts')
 
 function signup(req, res, next) {
-  const { username, password, displayname, profilepic, eatinghabits, quirks, bio, age, type, interactions } = req.body
+  const { username, password } = req.body
   if (!username && !password)
     return next({
       status: 400,
