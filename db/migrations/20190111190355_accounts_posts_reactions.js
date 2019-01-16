@@ -1,9 +1,9 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('accounts_posts_reactions', table => {
       table.increments();
-      table.integer('post_id').references('posts.id').onDelete('CASCADE')
-      table.integer('account_id').references('accounts.id').onDelete('CASCADE')
-      table.integer('reactions')
+      table.integer('post_id').references('posts.id').onDelete('CASCADE');
+      table.integer('account_id').references('accounts.id').onDelete('CASCADE');
+      table.integer('reactions').references('reactions.id').onDelete('CASCADE');
       table.timestamps(true, true);
   })
 .then(t => {

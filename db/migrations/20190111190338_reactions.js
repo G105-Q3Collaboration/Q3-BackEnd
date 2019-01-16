@@ -2,11 +2,7 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('reactions', table => {
       table.increments();
-      table.string('like');
-      table.string('sniff');
-      table.string('sleep');
-      table.string('growl');
-      table.string('sad');
+      table.string('reaction');
       table.timestamps(true, true);
   })
 };
