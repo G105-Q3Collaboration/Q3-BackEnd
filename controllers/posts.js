@@ -35,7 +35,7 @@ function getOnePost(req, res, next) {
 };
 
 function addPost(req, res, next) {
-  model.addPost(req.params.accountId, req.body)
+  model.addPost(req.params.accountId, req.body.content)
   .then((result) => {
     if (!result)
       return next({
