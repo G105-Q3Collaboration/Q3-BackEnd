@@ -2,7 +2,8 @@ const knex = require('../db/knex')
 
 function addPost(accountId, content) {
   return knex('posts')
-    .insert({ account_id: accountId, content})
+    .insert({ account_id: accountId, content })
+    .returning('*')
     .then(result =>  result)
 }
 
@@ -41,8 +42,15 @@ function getAllPosts() {
   .then(result => result)
 }
 
-function addReaction() {
-  return knex('posts')
+function addReaction(accountId, postId, reaction) {
+  return knex('reactions')
+  .where('reaction', reaction)
+  .returning('reaction')
+  .then(([reaction]) => {
+    return knex('accounts_posts_reactions')
+    .insert({ account_id: accountId, post_id: postId, reaction_id: reaction.id })
+    .returning('*')
+  })
 }
 
 function getReaction(postId) {
