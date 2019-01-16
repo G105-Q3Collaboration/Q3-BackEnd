@@ -45,6 +45,7 @@ function deletePost(postId) {
       'posts.id': postId
     })
     .del()
+    .returning('*')
     .then((result) => {
       return result
     })
