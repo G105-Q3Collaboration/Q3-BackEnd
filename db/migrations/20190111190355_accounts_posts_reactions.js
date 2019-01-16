@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
       table.increments();
       table.integer('post_id').references('posts.id').onDelete('CASCADE');
       table.integer('account_id').references('accounts.id').onDelete('CASCADE');
-      table.integer('reactions').references('reactions.id').onDelete('CASCADE');
+      table.integer('reaction_id').references('reactions.id').onDelete('CASCADE');
       table.timestamps(true, true);
   })
 .then(t => {

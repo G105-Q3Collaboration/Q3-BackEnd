@@ -7,7 +7,7 @@ function getOneAccount(accountId){
 	.returning('*')
 }
 
-function signup(displayname, username, password, profilepic, eatinghabits, quirks,bio, age, type, interactions ) {
+function signup(username, password ) {
 	return knex('accounts')
 	.where({ username })
 	.then(([data]) => {
@@ -19,7 +19,7 @@ function signup(displayname, username, password, profilepic, eatinghabits, quirk
 	})
 	.then((hashedPW) => {
 		return knex('accounts')
-			.insert({ username, password: hashedPW, displayname})
+			.insert({ username, password: hashedPW })
 			.returning('accounts.username')
 	})
 }

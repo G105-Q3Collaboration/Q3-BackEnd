@@ -20,12 +20,11 @@ app.use((req, res, next) => {
 })
 
 app.use((err, req, res, next) => {
-	console.log(err);
-	
 	const error = {}
 	if (process.env.NODE_ENV !== 'production' && err.stack) error.stack = err.stack
 	error.status = err.status || 500
 	error.message = err.message || `Internal Server Error`
+
 	console.error(error.message)
 	res.status(error.status).json(error)
 })
