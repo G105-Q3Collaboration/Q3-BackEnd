@@ -35,7 +35,8 @@ function editOneAccount(accountId, body) {
 	.then(() => {
 		return knex('accounts')
 			.update({
-				username:body.username, password:body.password, displayname:body.displayname, profilepic:body.profilepic, eatinghabits:body.eatinghabits, quirks:body.quirks, bio:body.bio, age:body.age, type:body.type, interaction:body.interaction
+				profilepic:body.profilepic, displayname:body.displayname, age:body.age,
+				bio:body.bio, type:body.type, eatinghabits:body.eatinghabits, quirks:body.quirks
 			})
 	})
 }

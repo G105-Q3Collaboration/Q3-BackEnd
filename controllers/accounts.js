@@ -48,7 +48,26 @@ function getAllAccounts(req, res, next) {
 }
 
 function editOneAccount(req, res, next) {
-  const { username, password, displayname, profilepic, eatinghabits, quirks, bio, age, type, interactions } = req.body
+  let { profilepic, displayname, age, bio, type, eatinghabits, quirks } = req.body
+
+  profilepic = profilepic || undefined
+  displayname = displayname || undefined
+  age = age || undefined
+  bio = bio || undefined
+  type = type || undefined
+  eatinghabits = eatinghabits || undefined
+  quirks = quirks || undefined
+
+  if(!profilepic && !displayname && !age && !bio && !type && !eatinghabits && !quirks){
+    return next({
+      status: 400,
+      message: "No input provided, we don't value your input anyway"
+    })
+  }
+
+  req.body = { profilepic, displayname, age, bio, type, eatinghabits, quirks }
+
+  console.log(req.body.type)
 
   return accountModel.editOneAccount(req.params.accountId, req.body)
   .then((result) => {
@@ -59,7 +78,7 @@ function editOneAccount(req, res, next) {
       })
     }
     res.status(201).send({
-      username, password, displayname, profilepic, eatinghabits, quirks, bio, age, type, interactions
+      profilepic, displayname, age, bio, type, eatinghabits, quirks
     })
   })
 }
