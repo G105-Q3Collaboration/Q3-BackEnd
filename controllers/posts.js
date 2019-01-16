@@ -16,11 +16,6 @@ function getAllPosts(req, res, next) {
 function getAllOneUserPosts(req, res, next) {
   model.getAllOneUserPosts(req.params.accountId)
   .then((result) => {
-    if (result.length < 1)
-      return next({
-        status: 404,
-        message: "post not found"
-      })
     res.status(200).send(result)
   })
   .catch(next)
