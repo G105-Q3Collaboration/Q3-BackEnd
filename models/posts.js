@@ -1,8 +1,8 @@
 const knex = require('../db/knex')
 
-function addPost(accountId, newPost) {
+function addPost(accountId, content) {
   return knex('posts')
-    .insert({ account_id: accountId, content: newPost})
+    .insert({ account_id: accountId, content})
     .then((result) => {
       return result
     })
