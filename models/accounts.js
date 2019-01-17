@@ -31,13 +31,19 @@ function getAllAccounts() {
 
 function editOneAccount(accountId, body) {
 	return knex('accounts')
-	.where({ id: accountId })
-	.then(() => {
-		return knex('accounts')
-			.update({
-				username:body.username, password:body.password, displayname:body.displayname, profilepic:body.profilepic, eatinghabits:body.eatinghabits, quirks:body.quirks, bio:body.bio, age:body.age, type:body.type, interaction:body.interaction
-			})
+	.update({
+		username: body.username,
+		password: body.password,
+		displayname: body.displayname,
+		profilepic: body.profilepic,
+		eatinghabits: body.eatinghabits,
+		quirks: body.quirks,
+		bio: body.bio,
+		age: body.age,
+		type: body.type
 	})
+	.where({ id: accountId })
+	.returning('*')
 }
 
 module.exports = {

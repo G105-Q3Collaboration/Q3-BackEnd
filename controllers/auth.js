@@ -34,7 +34,7 @@ function authStatus(req, res, next) {
 
 function checkRequest(req, res, next) {
   const id = req.params.accountId
-  if (+id !== req.claim.sub.id) return next({ status: 401, message: 'Unauthorized, ids dont match' })
+  if (+id !== req.claim.id) return next({ status: 401, message: 'Unauthorized, ids dont match' })
   next()
 }
 
