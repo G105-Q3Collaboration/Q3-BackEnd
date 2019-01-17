@@ -60,7 +60,6 @@ function getReaction(postId) {
   .join('posts', 'posts.id', 'accounts_posts_reactions.post_id')
   .where('post_id', postId )
   .returning('*')
-  // .then(result => result)
 }
 
 module.exports = {
