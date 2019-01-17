@@ -10,7 +10,6 @@ exports.up = function(knex, Promise) {
       table.string('bio');
       table.integer('age');
       table.string('type');
-      table.integer('interactions');
       table.timestamps(true, true);
   })
 };
