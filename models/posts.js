@@ -55,11 +55,12 @@ function addReaction(accountId, postId, reaction) {
 
 function getReaction(postId) {
   return knex('reactions')
-  .select('posts.id AS post_id', 'reaction' )
+  .select('reactions.id AS id', 'reaction' )
   .join('accounts_posts_reactions', 'accounts_posts_reactions.reaction_id', 'reactions.id')
   .join('posts', 'posts.id', 'accounts_posts_reactions.post_id')
   .where('post_id', postId )
-  .then(result => result)
+  .returning('*')
+  // .then(result => result)
 }
 
 module.exports = {
