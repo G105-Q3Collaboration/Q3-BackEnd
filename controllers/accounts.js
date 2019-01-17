@@ -14,9 +14,6 @@ function signup(req, res, next) {
       message: 'Something went wrong. Abandon all hope. The end is nigh.'
     })
     next()
-    // res.status(201).send({
-    //   message: `Account created for ${data}`
-    // })
   })
   .catch(next)
 }

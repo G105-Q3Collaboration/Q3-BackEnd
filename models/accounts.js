@@ -7,7 +7,7 @@ function getOneAccount(accountId){
 	.returning('*')
 }
 
-function signup(username, password ) {
+function signup(displayname, username, password) {
 	return knex('accounts')
 	.where({ username })
 	.then(([data]) => {
@@ -19,7 +19,7 @@ function signup(username, password ) {
 	})
 	.then((hashedPW) => {
 		return knex('accounts')
-			.insert({ username, password: hashedPW })
+			.insert({ username, password: hashedPW, displayname  })
 			.returning('accounts.username')
 	})
 }
@@ -31,14 +31,19 @@ function getAllAccounts() {
 
 function editOneAccount(accountId, body) {
 	return knex('accounts')
-	.where({ id: accountId })
-	.then(() => {
-		return knex('accounts')
-			.update({
-				profilepic:body.profilepic, displayname:body.displayname, age:body.age,
-				bio:body.bio, type:body.type, eatinghabits:body.eatinghabits, quirks:body.quirks
-			})
+	.update({
+		username: body.username,
+		password: body.password,
+		displayname: body.displayname,
+		profilepic: body.profilepic,
+		eatinghabits: body.eatinghabits,
+		quirks: body.quirks,
+		bio: body.bio,
+		age: body.age,
+		type: body.type
 	})
+	.where({ id: accountId })
+	.returning('*')
 }
 
 module.exports = {
