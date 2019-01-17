@@ -13,11 +13,4 @@ router.put('/:postId', postsCtrl.updatePost)
 router.get('/:postId/reactions', postsCtrl.getReaction)
 router.post('/:postId/reactions', postsCtrl.addReaction)
 
-// router.get('/allPosts',authCtrl.authenticate, authCtrl.checkRequest, postsCtrl.getAllPosts)
-// router.get('/',authCtrl.authenticate, authCtrl.checkRequest, postsCtrl.getAllOneUserPosts)
-// router.get('/:postId',authCtrl.authenticate, authCtrl.checkRequest, postsCtrl.getOnePost)
-// router.delete('/:postId',authCtrl.authenticate, authCtrl.checkRequest, postsCtrl.deletePost)
-// router.post('/',authCtrl.authenticate, authCtrl.checkRequest, postsCtrl.addPost)
-// router.put('/:postId', authCtrl.authenticate, authCtrl.checkRequest, postsCtrl.updatePost)
-
 module.exports = router
