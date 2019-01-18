@@ -20,7 +20,7 @@ exports.seed = function(knex, Promise) {
     {id:18, post_id:6, account_id:3,reaction_id:5},
     {id:19, post_id:7, account_id:4,reaction_id:1},
     {id:20, post_id:7, account_id:5,reaction_id:2},
-    {id:21, post_id:7, account_id:1,reaction_id:3},
+    {id:21, post_id:7, account_id:1,reaction_id:3}
   ])
   .then(() => {
     return knex.raw(

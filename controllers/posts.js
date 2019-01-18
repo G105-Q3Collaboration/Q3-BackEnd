@@ -71,9 +71,11 @@ function updatePost(req, res, next) {
 }
 
 function addReaction(req, res, next) {
-  return model.addReaction(req.params.accountId, req.params.postId, req.body.reaction)
+  console.log(req.claim);
+
+  return model.addReaction(req.claim.sub.id, req.params.postId, req.body.reaction)
   .then(result => {
-    if (!result) return ({ status: 404, message: 'error' })
+    if (!result) return next({ status: 404, message: 'error' })
     res.status(201).send(result)
   })
   .catch(next)
@@ -82,7 +84,7 @@ function addReaction(req, res, next) {
 function getReaction(req, res, next) {
   return model.getReaction(req.params.postId)
   .then(result => {
-    if (!result) return ({ status: 404, message: 'no reactions found' })
+    if (!result) return next({ status: 404, message: 'no reactions found' })
     res.status(200).send(result)
   })
   .catch(next)
