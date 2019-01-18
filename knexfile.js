@@ -1,10 +1,11 @@
 'use strict';
 const path = require('path')
+const DB_NAME='squeaker'
 
 module.exports = {
   development: {
     client: 'pg',
-    connection: 'postgres://localhost/squeaker_dev',
+    connection: `postgres://localhost/${DB_NAME}_dev`,
     migrations: {
         directory: path.join(__dirname, 'db', 'migrations')
     },
@@ -15,7 +16,7 @@ module.exports = {
 
   test: {
     client: 'pg',
-    connection: 'postgres://localhost/squeaker_test',
+    connection: `postgres://localhost/${DB_NAME}_test`,
     migrations: {
         directory: path.join(__dirname, 'db', 'migrations')
     },
