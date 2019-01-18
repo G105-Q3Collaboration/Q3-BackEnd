@@ -1,4 +1,5 @@
 const accountModel = require('../models/accounts')
+const cloudinary = require('cloudinary')
 
 function signup(req, res, next) {
   const { petname, username, password } = req.body
@@ -8,40 +9,40 @@ function signup(req, res, next) {
       message: 'Username and Password required for creating an account'
     })
   return accountModel.signup(petname, username, password)
-  .then(([data]) => {
-    if (!data) return next({
-      status: 500,
-      message: 'Something went wrong. Abandon all hope. The end is nigh.'
+    .then(([data]) => {
+      if (!data) return next({
+        status: 500,
+        message: 'Something went wrong. Abandon all hope. The end is nigh.'
+      }) 
+      next()
     })
-    next()
-  })
-  .catch(next)
+    .catch(next)
 }
 
 function getOneAccount(req, res, next) {
   return accountModel.getOneAccount(req.params.accountId)
-  .then((result) => {
-    if (!result) {
-      return next({
-        status: 404,
-        message: 'account not found'
-      })
-    }
-    res.status(200).send(result)
-  })
+    .then((result) => {
+      if (!result) {
+        return next({
+          status: 404,
+          message: 'account not found'
+        })
+      }
+      res.status(200).send(result)
+    })
 }
 
 function getAllAccounts(req, res, next) {
   return accountModel.getAllAccounts()
-  .then((result) => {
-    if (!result) {
-      return next({
-        status: 404,
-        message: 'accounts not found'
-      })
-    }
-    res.status(200).send(result)
-  })
+    .then((result) => {
+      if (!result) {
+        return next({
+          status: 404,
+          message: 'accounts not found'
+        })
+      }
+      res.status(200).send(result)
+    })
 }
 
 function editOneAccount(req, res, next) {
@@ -55,7 +56,7 @@ function editOneAccount(req, res, next) {
   eatinghabits = eatinghabits || undefined
   quirks = quirks || undefined
 
-  if(!profilepic && !displayname && !age && !bio && !type && !eatinghabits && !quirks){
+  if (!profilepic && !displayname && !age && !bio && !type && !eatinghabits && !quirks) {
     return next({
       status: 400,
       message: "No input provided, we don't value your input anyway"
@@ -64,22 +65,35 @@ function editOneAccount(req, res, next) {
 
   req.body = { profilepic, displayname, age, bio, type, eatinghabits, quirks }
 
-  console.log(req.body.type)
-
   return accountModel.editOneAccount(req.params.accountId, req.body)
-  .then((result) => {
-    if (!result) {
-      return next({
-        status: 404,
-        message: 'account not found'
+    .then((result) => {
+      if (!result) {
+        return next({
+          status: 404,
+          message: 'account not found'
+        })
+      }
+      res.status(201).send({
+        profilepic, displayname, age, bio, type, eatinghabits, quirks
       })
-    }
-    res.status(201).send({
-      profilepic, displayname, age, bio, type, eatinghabits, quirks
     })
+}
+
+function uploadImage(req, res, next) {
+  let imageurl
+  cloudinary.config({
+    cloud_name: 'squeaker',
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
   })
+  cloudinary.v2.uploader.upload(req.body.image, (err, result) => {
+    if (err) return next({status: 500, message: 'the cloud broke'})
+    imageurl = result.url
+    res.status(201).send({image: result.url})
+  })
+  return imageurl
 }
 
 module.exports = {
-  signup, getOneAccount, getAllAccounts, editOneAccount
+  signup, getOneAccount, getAllAccounts, editOneAccount, uploadImage
 }
