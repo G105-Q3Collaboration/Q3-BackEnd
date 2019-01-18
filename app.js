@@ -14,6 +14,9 @@ app.use(bodyParser.json())
 app.use('/accounts', require('./routes/accounts'))
 app.use('/auth', require('./routes/auth'))
 app.use('/posts', require('./routes/posts'))
+app.use('/allPosts', require('./controllers/posts').getAllPosts)
+
+// app.get('/lists', require('./controllers/list-controllers').getAllLists)
 
 app.use((req, res, next) => {
   next({status:404, message: 'Unable to locate'})
