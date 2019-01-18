@@ -6,12 +6,12 @@ exports.up = function(knex, Promise) {
       table.integer('reaction_id').references('reactions.id').onDelete('CASCADE');
       table.timestamps(true, true);
   })
-.then(t => {
-  return knex.schema.raw(
-    `ALTER TABLE "accounts_posts_reactions"
-     ADD CONSTRAINT "accounts_posts_reactions_unique" UNIQUE(account_id, post_id)`
-  )
-})
+  .then(t => {
+    return knex.schema.raw(
+      `ALTER TABLE "accounts_posts_reactions"
+      ADD CONSTRAINT "accounts_posts_reactions_unique" UNIQUE(account_id, post_id)`
+    )
+  })
 }
 
 exports.down = function(knex, Promise) {

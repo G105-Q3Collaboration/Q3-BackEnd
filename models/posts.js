@@ -43,13 +43,20 @@ function getAllPosts() {
 }
 
 function addReaction(accountId, postId, reaction) {
+  let reactionId
   return knex('reactions')
   .where('reaction', reaction)
   .returning('reaction')
   .then(([reaction]) => {
+    reactionId = reaction.id
     return knex('accounts_posts_reactions')
-    .insert({ account_id: accountId, post_id: postId, reaction_id: reaction.id })
-    .returning('*')
+    .where({'account_id': accountId, 'post_id': postId})
+  })
+  .then(([reaction]) => {
+    if (!reaction)
+      return knex('accounts_posts_reactions')
+        .insert({ account_id: accountId, post_id: postId, reaction_id: reactionId })
+        .returning('*')
   })
 }
 
