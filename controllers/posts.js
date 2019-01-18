@@ -71,8 +71,6 @@ function updatePost(req, res, next) {
 }
 
 function addReaction(req, res, next) {
-  console.log(req.claim);
-
   return model.addReaction(req.params.accountId, req.params.postId, req.body.reaction)
   .then(result => {
     if (!result) return next({ status: 404, message: 'error' })
