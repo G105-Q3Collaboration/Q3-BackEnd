@@ -9,7 +9,7 @@ if(process.env.NODE_ENV !== 'production') require('dotenv').load()
 
 app.use(cors())
 app.use(morgan('dev'))
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: '5mb'}))
 
 app.use('/accounts', require('./routes/accounts'))
 app.use('/auth', require('./routes/auth'))
