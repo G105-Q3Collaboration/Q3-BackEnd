@@ -2,11 +2,7 @@
 
 # Introduction
 
-Squeaker Pets is a fully-responsive social media application for your pets.
-
-#Squeaker API
-
-In order to run the squeaker backend. Please follow the instructions below. There is also a link to the frontend of our project below.
+Squeaker Pets is a fully-responsive social media application for your pets. In order to run the Squeaker backend, please follow the instructions below.
 
 ## Installation
 
