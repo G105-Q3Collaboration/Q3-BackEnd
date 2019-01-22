@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/squeaker-g105-q3/squeaker-backend"
   },
-  "author": "",
+  "authors": "Katrina Agustin, Toby Peterson, Tristan Porter",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/squeaker-g105-q3/squeaker-backend/issues"
