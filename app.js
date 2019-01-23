@@ -14,15 +14,13 @@ app.use(bodyParser.json({limit: '5mb'}))
 app.use('/accounts', require('./routes/accounts'))
 app.use('/auth', require('./routes/auth'))
 app.use('/posts', require('./routes/posts'))
-app.use('/allPosts', require('./controllers/posts').getAllPosts)
-
-// app.get('/lists', require('./controllers/list-controllers').getAllLists)
 
 app.use((req, res, next) => {
   next({status:404, message: 'Unable to locate'})
 })
 
 app.use((err, req, res, next) => {
+	console.log(err)
 	const error = {}
 	if (process.env.NODE_ENV !== 'production' && err.stack) error.stack = err.stack
 	error.status = err.status || 500
