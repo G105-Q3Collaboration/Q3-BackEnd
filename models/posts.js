@@ -37,11 +37,6 @@ function deletePost(postId) {
     .then(result => result)
 }
 
-function getAllPosts() {
-  return knex('posts')
-  .then(result => result)
-}
-
 function addReaction(accountId, postId, reaction) {
   let reactionId
   return knex('reactions')
@@ -70,5 +65,5 @@ function getReaction(postId) {
 }
 
 module.exports = {
-  getAllPosts, getAllOneUserPosts, getOnePost, addPost, deletePost, updatePost, addReaction, getReaction
+  getAllOneUserPosts, getOnePost, addPost, deletePost, updatePost, addReaction, getReaction
 }
