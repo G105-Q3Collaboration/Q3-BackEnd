@@ -12,7 +12,7 @@ function signup(req, res, next) {
     .then(([data]) => {
       if (!data) return next({
         status: 500,
-        message: 'Something went wrong. Abandon all hope. The end is nigh my friend.'
+        message: 'Something went wrong. Abandon all hope. The end is nigh friend.'
       }) 
       next()
     })
