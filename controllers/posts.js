@@ -1,18 +1,5 @@
 const model = require('../models/posts');
 
-function getAllPosts(req, res, next) {
-  model.getAllPosts()
-  .then((result) => {
-    if (result.length < 1)
-    return next({
-      status: 404,
-      message: "post not found"
-    })
-    res.status(200).send(result)
-  })
-  .catch(next)
-}
-
 function getAllOneUserPosts(req, res, next) {
   model.getAllOneUserPosts(req.params.accountId)
   .then((result) => {
@@ -89,5 +76,5 @@ function getReaction(req, res, next) {
 }
 
 module.exports = {
-  getAllPosts, getAllOneUserPosts, getOnePost, addPost, deletePost, updatePost, addReaction, getReaction
+  getAllOneUserPosts, getOnePost, addPost, deletePost, updatePost, addReaction, getReaction
 }
